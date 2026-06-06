@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+    <!--Tailwind CSS CDN LINK-->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-purple-300 flex justify-center items-center min-h-screen">
+     <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h1 class="text-2xl font-bold text-center mb-6">
+            Registration Form
+        </h1>
+         <form id="registerForm">
+             <!-- Name -->
+            <div class="mb-4">
+                 <label class="block mb-2 font-medium">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full border p-2 rounded"
+                         placeholder="Enter your name"
+                         >
+                         <p id="nameError" class="text-red-500 text-sm mt-1"></p>
+            </div>
+
+              <!-- Email -->
+            <div class="mb-4">
+                <label class="block mb-2 font-medium">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    class="w-full border p-2 rounded"
+                    placeholder="Enter your email"
+                >
+                <p id="emailError" class="text-red-500 text-sm mt-1"></p>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="block mb-2 font-medium">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    class="w-full border p-2 rounded"
+                    placeholder="Enter your password"
+                    >
+                       <p id="passwordError" class="text-red-500 text-sm mt-1"></p>
+            </div>
+
+              <!-- Submit Button -->
+            <button
+                type="submit"
+                 id="submitBtn"
+                  disabled
+                  class="w-full bg-green-500 text-white py-2 rounded disabled:bg-gray-400"
+            >
+                Register
+            </button>
+</form>
+</div>
+
+<script>
+     const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const submitBtn = document.getElementById("submitBtn");
+
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+        function validateForm() {
+
+            let isValid = true;
+
+            // Name Validate 
+            if (nameInput.value.trim() === "") {
+                nameError.textContent = "Name is required.";
+                isValid = false;
+            } else {
+                nameError.textContent = "";
+            }
+
+            // Email Validate 
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(emailInput.value)) {
+                emailError.textContent = "Enter a valid email address";
+                isValid = false;
+            } else if (!emailPattern.test(emailInput.value)) {
+                emailError.textContent = "Please enter a valid email.";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Password Validate 
+            if (passwordInput.value.length < 6) {
+                passwordError.textContent =
+                    "Password must be at least 6 characters";
+                isValid = false;
+            
+            } else {
+                passwordError.textContent = "";
+            }
+
+            submitBtn.disabled = !isValid;
+        }
+        //Real Time Validation
+        nameInput.addEventListener("input", validateForm);
+        emailInput.addEventListener("input", validateForm);
+        passwordInput.addEventListener("input", validateForm);
+
+        // Form Submit 
+        document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Registration successful!");
+          
+        });
+</script>
+
+
+    
+</body>
+</html>
